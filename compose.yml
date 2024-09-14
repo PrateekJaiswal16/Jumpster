@@ -1,19 +1,5 @@
 version: '3.8'
 services:
-  # MongoDB service
-  mongo:
-    image: mongo:latest
-    container_name: mongo
-    restart: always
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: mydb
-
   # Backend (Node.js + Express) service
   backend:
     build:
@@ -21,12 +7,12 @@ services:
       dockerfile: Dockerfile
     container_name: backend
     restart: always
+    network: host
     ports:
       - "5000:5000"
     environment:
-      MONGO_URI: mongodb://admin:password@mongo:27017/mydb
-    depends_on:
-      - mongo
+      MONGODB_URI=${MONGODB_URI}
+      JWT_SECRET=${JWT_SECRET}
 
   # Frontend (React) service
   frontend:
@@ -35,10 +21,10 @@ services:
       dockerfile: Dockerfile
     container_name: frontend
     restart: always
+    network: host
     ports:
       - "3000:3000"
+    environment:
+      REACT_APP_API_URL: backend
     depends_on:
       - backend
-
-volumes:
-  mongo-data:
