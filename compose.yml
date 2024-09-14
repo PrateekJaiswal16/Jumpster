@@ -13,8 +13,8 @@ services:
     env-file:
       - .env
     environment:
-      MONGODB_URI=${MONGODB_URI}
-      JWT_SECRET=${JWT_SECRET}
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
 
   # Frontend (React) service
   frontend:
@@ -29,6 +29,6 @@ services:
     env-file:
       - .env
     environment:
-      REACT_APP_API_URL=backend
+      - REACT_APP_API_URL=backend
     depends_on:
       - backend
