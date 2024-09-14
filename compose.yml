@@ -29,6 +29,6 @@ services:
     env-file:
       - .env
     environment:
-      REACT_APP_API_URL: backend
+      REACT_APP_API_URL=backend
     depends_on:
       - backend
