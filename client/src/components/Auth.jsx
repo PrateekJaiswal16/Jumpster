@@ -13,7 +13,7 @@ const Auth = () => {
   const handleLogin = async () => {
     
     try {
-      // console.log('API URL:', apiUrl);
+      console.log(`${apiUrl}/api/login`);
 
       // console.log(process.env.REACT_APP_API_URL);
       const response = await axios.post(`${apiUrl}/api/login`, { username, password });
