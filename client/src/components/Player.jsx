@@ -17,7 +17,7 @@ const Player = ({
   const [highestY, setHighestY] = useState(position.y);
 
   const gravity = 0.1;
-  const initialVelocityY = -4.69; 
+  const initialVelocityY = -4.5; 
   const boardWidth = 360;
   const boardHeight = 576;
   const finishLevel = 50; 
