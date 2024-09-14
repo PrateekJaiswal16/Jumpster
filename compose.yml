@@ -23,6 +23,8 @@ services:
     restart: always
     ports:
       - "3000:80"
+    env-file:
+      - .env
     environment:
       - REACT_APP_API_URL=backend
     depends_on:
