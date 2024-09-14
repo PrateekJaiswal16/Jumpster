@@ -10,8 +10,6 @@ services:
     network: host
     ports:
       - "5000:5000"
-    env-file:
-      - .env
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - JWT_SECRET=${JWT_SECRET}
@@ -26,8 +24,6 @@ services:
     network: host
     ports:
       - "3000:3000"
-    env-file:
-      - .env
     environment:
       - REACT_APP_API_URL=backend
     depends_on:
