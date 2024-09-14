@@ -9,6 +9,8 @@ services:
     restart: always
     ports:
       - "5000:5000"
+    network:
+      - environ
     environment:
       - MONGODB_URI=${MONGODB_URI}
       - JWT_SECRET=${JWT_SECRET}
@@ -23,9 +25,12 @@ services:
     restart: always
     ports:
       - "3000:80"
-    env-file:
-      - .env
+    network:
+      - environ
     environment:
       - REACT_APP_API_URL=backend
     depends_on:
       - backend
+
+networks:
+  environ:
