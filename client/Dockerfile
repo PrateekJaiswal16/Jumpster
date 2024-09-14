@@ -7,14 +7,14 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies and log the output
+RUN npm install >> /usr/src/app/build_logs.txt 2>&1
 
 # Copy the rest of the application code
 COPY . .
 
-# Build the React app
-RUN npm run build
+# Build the React app and log the output
+RUN npm run build >> /usr/src/app/build_logs.txt 2>&1
 
 # Use Nginx to serve the static files
 FROM nginx:alpine
@@ -25,5 +25,8 @@ COPY --from=build /usr/src/app/build /usr/share/nginx/html
 # Expose port 80 for Nginx
 EXPOSE 80
 
-# Start Nginx
+# Start Nginx with log redirection
 CMD ["nginx", "-g", "daemon off;"]
+
+# Copy build logs to be accessible from the container
+COPY --from=build /usr/src/app/build_logs.txt /usr/share/nginx/html/build_logs.txt
