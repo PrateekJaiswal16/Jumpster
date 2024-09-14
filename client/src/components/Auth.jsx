@@ -13,10 +13,10 @@ const Auth = () => {
   const handleLogin = async () => {
     
     try {
-      console.log(`${apiUrl}/api/login`);
+      console.log(`/api/login`);
 
       // console.log(process.env.REACT_APP_API_URL);
-      const response = await axios.post(`${apiUrl}/api/login`, { username, password });
+      const response = await axios.post(`/api/login`, { username, password });
       if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
         navigate('/game');
@@ -31,7 +31,7 @@ const Auth = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/api/signup`, { username, password });
+      const response = await axios.post(`/api/signup`, { username, password });
       if (response.status === 201) {
         alert('Registration successful. Please log in.');
         setIsLogin(true);

@@ -58,7 +58,7 @@ const Game = () => {
           return;
         }
 
-        const response = await axios.get(`${apiUrl}/api/highscore`, {
+        const response = await axios.get(`/api/highscore`, {
           headers: { authorization: token },
         });
         setHighScore(response.data.highScore || 0);
@@ -93,7 +93,7 @@ const Game = () => {
       try {
         const token = localStorage.getItem("authToken");
         await axios.post(
-          `${apiUrl}/api/highscore`,
+          `/api/highscore`,
           { score },
           {
             headers: { authorization: token },
